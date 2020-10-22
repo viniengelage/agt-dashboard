@@ -1,22 +1,26 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
-import Home from '../pages/Home';
+import {
+  Redirect,
+  Route as ReactDOMRoute,
+} from 'react-router-dom';
 
-import Header from '../components/header'
-import Sidebar from '../components/menu'
+import Home from '../pages/Home'
 
-const Routes = (props) => {
-    return(
-        <>
-            <BrowserRouter>
-                <Header/>
-                <Sidebar/>
-                <Switch>
-                    <Route path="/" exact component={Home}/>
-                </Switch>
-            </BrowserRouter>
-        </>
-    )
-}
+const IndexRoutes = ({
+  component: Component,
+  ...rest
+}) => {
+  const isLogged = !!localStorage.getItem('@AgoraTem:acess_token');
+  return isLogged ? (
+    <ReactDOMRoute
+      {...rest}
+      render={() => {
+        return <Home/>;
+      }}
+    />
+  ) : (
+    <Redirect to="/login" />
+  );
+};
 
-export default Routes;
+export default IndexRoutes;

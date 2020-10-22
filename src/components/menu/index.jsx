@@ -1,13 +1,18 @@
 import React from "react";
-import { slide as Menu } from "react-burger-menu";
+import {IoMdCube} from 'react-icons/io'
 
-import logo from '../../assets/agt-logo.svg'
-import {Container} from './styles'
+import Profile from "./Profile";
+import {Container, ButtonContainer} from './styles'
 
 const Sidebar = props => {
   return (
     <Container>
-      <img src={logo}/>
+      <Profile/>
+
+      <ButtonContainer>
+        <IoMdCube size={24} color="#fff"/>
+        <strong>Pedidos</strong>
+      </ButtonContainer>
     </Container>
   );
 };
