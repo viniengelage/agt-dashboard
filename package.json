@@ -6,9 +6,20 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
+    "cheeseburger-menu": "^0.0.13",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-react": "^7.20.0",
     "react": "^17.0.0",
+    "react-animated-burgers": "^1.2.8",
+    "react-burger-menu": "2.7.1",
     "react-dom": "^17.0.0",
-    "react-scripts": "3.4.4"
+    "react-hamburger-menu": "^1.2.1",
+    "react-icons": "^3.11.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.4",
+    "styled-components": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +41,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint-config-prettier": "^6.14.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2"
   }
 }
