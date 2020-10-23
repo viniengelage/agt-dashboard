@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import auth from '../services/api'
+import auth from '../services/api';
+
 const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
@@ -12,7 +13,7 @@ const AuthProvider = ({ children }) => {
       return { access_token, user: JSON.parse(user) };
     }
 
-    return {}
+    return {};
   });
 
   const signIn = useCallback(async ({ email, password }) => {
@@ -20,16 +21,15 @@ const AuthProvider = ({ children }) => {
       email,
       password,
     });
-    
+
     const { access_token } = response.data;
     auth.defaults.headers.authorization = `Bearer ${access_token}`;
-    
-    const responseMe = await auth.get('/me')
-    const user = responseMe.data
-    console.log(user)
+
+    const responseMe = await auth.get('/me');
+    const user = responseMe.data;
 
     localStorage.setItem('@AgoraTem:access_token', access_token);
-    localStorage.setItem('@AgoraTem:user', JSON.stringify(user))
+    localStorage.setItem('@AgoraTem:user', JSON.stringify(user));
 
     setData({ access_token, user });
   }, []);

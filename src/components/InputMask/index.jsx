@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
+import ReactInputMask from 'react-input-mask';
 import { useField } from '@unform/core';
 
 import { Container, InputBlock } from './styles';
 
-export default function Input({ name, label, ...rest }) {
+const InputMask = ({ name, label, ...rest }) => {
+  const inputRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const inputRef = useRef(null);
-
-  const { fieldName, defaultValue = '', registerField, error } = useField(name);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -25,13 +25,19 @@ export default function Input({ name, label, ...rest }) {
       name: fieldName,
       ref: inputRef.current,
       path: 'value',
+      setValue(ref, value) {
+        ref.setInputValue(value);
+      },
+      clearValue(ref) {
+        ref.setInputValue('');
+      },
     });
   }, [fieldName, registerField]);
   return (
     <InputBlock>
       {label && <label htmlFor={fieldName}>{label}</label>}
       <Container isFocused={isFocused} isFilled={isFilled}>
-        <input
+        <ReactInputMask
           ref={inputRef}
           id={fieldName}
           defaultValue={defaultValue}
@@ -44,4 +50,5 @@ export default function Input({ name, label, ...rest }) {
       </Container>
     </InputBlock>
   );
-}
+};
+export default InputMask;

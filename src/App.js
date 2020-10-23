@@ -1,18 +1,18 @@
 import React from 'react';
-import Sidebar from './components/menu';
-import logo from './logo.svg';
+import { BrowserRouter } from 'react-router-dom';
 import IndexRoutes from './routes';
 
-import {AuthProvider} from './hooks/auth'
-import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './hooks/auth';
+import { GlobalStyles } from './global';
 
 function App() {
   return (
     <>
       <AuthProvider>
         <BrowserRouter>
-          <IndexRoutes/>
+          <IndexRoutes />
         </BrowserRouter>
+        <GlobalStyles />
       </AuthProvider>
     </>
   );

@@ -55,18 +55,4 @@ export const Container = styled.div`
       outline: none;
     }
   }
-  input[type='file']::-webkit-file-upload-button {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    border: 0;
-    border-right: 1px solid #bababa;
-    cursor: pointer;
-    margin: 0;
-    padding: 10px 10px 10px 0;
-    background: none;
-    color: #3f3d56;
-    box-shadow: none;
-    outline: none;
-  }
 `;

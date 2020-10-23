@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import { IoMdMenu, IoMdPerson } from 'react-icons/io';
+import CheeseburgerMenu from 'cheeseburger-menu';
 
-import {Container} from './styles'
-import Sidebar from '../menu'
+import Menu from '../menu';
 
-import logo from '../../assets/agt-logo-branco.svg'
+import { Container } from './styles';
+
+import logo from '../../assets/agt-logo-branco.svg';
 
 const Header = (props) => {
-    return(
-        <Container>
-            <img src={logo}/>
-        </Container>
-    )
-}
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function openMenu() {
+    setMenuOpen(true);
+  }
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+  return (
+    <>
+      <Container>
+        <IoMdMenu size={36} onClick={openMenu} />
+        <img src={logo} alt="logo-agora-tem" />
+        <IoMdPerson size={36} />
+      </Container>
+
+      <CheeseburgerMenu isOpen={menuOpen} closeCallback={closeMenu}>
+        <Menu />
+      </CheeseburgerMenu>
+    </>
+  );
+};
 
 export default Header;
