@@ -37,12 +37,33 @@ export const ButtonContainer = styled.div`
     width: 100%;
     align-items: center;
     margin-top: 40px;
+    cursor: pointer;
 
     svg{
         margin-right: 5px;
+        color: #fff;
     }
     strong{
         font-size: 1rem;
         color: #fff;
     }
+    &:hover{
+       strong{
+           color: #000;
+       } 
+       svg{
+           color: #000;
+       }  
+    }
+`;
+
+export const Icon = styled.i`
+  color: #000;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  transition: all 0.2s ease-in-out;
+  @media only screen and (max-width: 600px) {
+    text-align: center;
+    margin: 0 auto 0 auto;
+  }
 `;

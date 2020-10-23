@@ -1,21 +1,35 @@
-import React from 'react';
-import {
-  Redirect,
-  Route as ReactDOMRoute,
-} from 'react-router-dom';
+import React from "react";
+import { Switch, Redirect, Route } from "react-router-dom";
 
+import Login from '../pages/Login'
 import Home from '../pages/Home'
 
-const IndexRoutes = ({
+import {SellersRoutes} from '../routes/config'
+
+const Routes = () => {
+  return (
+    <Switch>
+      <Route exact path="/" component={() => <Redirect to="/login" />} />
+      <Route path="/login" component={Login} />
+      {/* <PrivateRoute path="/admin" component={AdminRoutes} /> */}
+      <PrivateRoute path="/home" component={Home}/>
+      {SellersRoutes.map((route, i) => (
+            <PrivateRoute key={i} {...route} />
+      ))}
+    </Switch>
+  );
+};
+
+const PrivateRoute = ({
   component: Component,
   ...rest
 }) => {
-  const isLogged = !!localStorage.getItem('@AgoraTem:acess_token');
+  const isLogged = !!localStorage.getItem('@AgoraTem:access_token');
   return isLogged ? (
-    <ReactDOMRoute
+    <Route
       {...rest}
       render={() => {
-        return <Home/>;
+        return <Component />;
       }}
     />
   ) : (
@@ -23,4 +37,4 @@ const IndexRoutes = ({
   );
 };
 
-export default IndexRoutes;
+export default Routes;
