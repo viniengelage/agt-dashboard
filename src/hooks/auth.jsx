@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
     auth.defaults.headers.authorization = `Bearer ${access_token}`;
 
     if (access_token && user) {
-      return { access_token, user };
+      return { access_token, user: JSON.parse(user) };
     }
 
     return {}
@@ -24,12 +24,14 @@ const AuthProvider = ({ children }) => {
     const { access_token } = response.data;
     auth.defaults.headers.authorization = `Bearer ${access_token}`;
     
-    const user = await auth.get('/me')
+    const responseMe = await auth.get('/me')
+    const user = responseMe.data
+    console.log(user)
 
     localStorage.setItem('@AgoraTem:access_token', access_token);
-    localStorage.setItem('@AgoraTem:user', user)
+    localStorage.setItem('@AgoraTem:user', JSON.stringify(user))
 
-    setData({ access_token });
+    setData({ access_token, user });
   }, []);
 
   const signOut = useCallback(() => {

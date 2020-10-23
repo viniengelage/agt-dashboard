@@ -1,22 +1,12 @@
-import React from 'react';
-import { Form } from '@unform/web'
-import InputBasic from '../../components/InputBasic';
+import React from "react";
+import FormContainer from "../../components/Sign/form-container";
 
-const Login = props => {
-    return(
-        <>
-            <Form>
-                <InputBasic 
-                    name="email"
-                    label="Email"
-                />
-                <InputBasic
-                    name="password"
-                    label="Senha"
-                />
-            </Form>
-        </>
-    )
-}
+const Login = () => {
+  return (
+    <>
+      <FormContainer login />
+    </>
+  );
+};
 
 export default Login;
