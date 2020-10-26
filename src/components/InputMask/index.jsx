@@ -4,7 +4,7 @@ import { useField } from '@unform/core';
 
 import { Container, InputBlock } from './styles';
 
-const InputMask = ({ name, label, ...rest }) => {
+const InputMask = ({ name, label, icon, ...rest }) => {
   const inputRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -33,10 +33,14 @@ const InputMask = ({ name, label, ...rest }) => {
       },
     });
   }, [fieldName, registerField]);
+
+  const Icon = icon;
+
   return (
     <InputBlock>
       {label && <label htmlFor={fieldName}>{label}</label>}
       <Container isFocused={isFocused} isFilled={isFilled}>
+        <Icon size={36}/>
         <ReactInputMask
           ref={inputRef}
           id={fieldName}

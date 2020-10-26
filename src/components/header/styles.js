@@ -8,12 +8,14 @@ export const Container = styled.div`
   justify-content: space-around;
   align-items: center;
 
-  img {
-    color: #fff;
-    width: 20vh;
-  }
   svg {
     cursor: pointer;
     color: #ffff;
   }
+`;
+
+export const Logo = styled.img`
+    color: #fff;
+    width: 18vh;
+    cursor: pointer;
 `;

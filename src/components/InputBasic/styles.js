@@ -14,20 +14,28 @@ export const InputBlock = styled.div`
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  color: #444444;
-  padding: 5px 12px;
   width: 100%;
-  height: 40px;
+  height: 60px;
   margin: 8px 0 0 0;
   background: #ffffff;
   border: 1px solid #bababa;
   box-sizing: border-box;
   border-radius: 5px;
 
+  svg{
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #3F3D56;
+  }
+
   ${(props) =>
     props.isErrored &&
     css`
       border-color: #c53030;
+
+      svg{
+        color: #c53030;
+      }
     `}
   ${(props) =>
     props.isFocused &&
@@ -35,6 +43,10 @@ export const Container = styled.div`
       color: #f39200;
       border-color: #f39200;
       box-shadow: 0 0 0 1px #f39200;
+
+      svg{
+        color: #f39200;
+      }
     `}
   ${(props) =>
     props.isFilled &&
@@ -42,17 +54,27 @@ export const Container = styled.div`
       color: #f39200;
       border-color: #f39200;
       box-shadow: 0 0 0 1px #f39200;
+
+      svg{
+        color: #f39200;
+      }
     `}
 
   input {
     background: transparent;
     border: 0;
-    width: 100%;
+    width: 80%;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
+    color: #3F3D56;
     &:focus {
       outline: none;
+    }
+
+    &::placeholder{
+      color:#3F3D56;
+      font-size: 16px;
     }
   }
   input[type='file']::-webkit-file-upload-button {

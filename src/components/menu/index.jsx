@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/auth';
 import Profile from './Profile';
 import { Container, ButtonContainer, ExitContainer, Exit } from './styles';
 
-import { SellersRoutes } from '../../routes/config';
+import { SellersRoutes, CustomerRoutes } from '../../routes/config';
 
 const Sidebar = ({ open }) => {
   const { user, signOut } = useAuth();
@@ -16,25 +16,36 @@ const Sidebar = ({ open }) => {
     signOut();
 
     history.push('/login');
-  }, []);
+  }, [history, signOut]);
+
+  const handleVerifyRole = useCallback((role) => {
+    switch (role) {
+      case 'customer':
+        return CustomerRoutes 
+      case 'seller':
+        return SellersRoutes
+      default:
+        break
+    }
+  },[])
 
   return (
     <Container>
       <Profile />
-      {SellersRoutes.map((route, i) => {
+      {handleVerifyRole(user.role).map((route, i) => {
         if (!route.menu) {
           return '';
         }
-        const IconTeste = route.icon;
+        const Icon = route.icon;
         return (
           <ButtonContainer key={i} onClick={() => history.push(route.path)}>
-            <IconTeste size={24} className={route.icon} />
+            <Icon size={24} className={route.icon} />
             <strong>{route.title}</strong>
           </ButtonContainer>
         );
       })}
       <ExitContainer onClick={handleLogOut}>
-        <IoMdExit size={24} stroke="0" />
+        <IoMdExit size={24} />
         <Exit>Sair</Exit>
       </ExitContainer>
     </Container>

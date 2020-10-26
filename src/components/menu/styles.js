@@ -13,6 +13,9 @@ export const Container = styled.div`
   @media only screen and (max-width: 1400px) {
     width: 300px;
   }
+  @media only screen and (max-width: 500px) {
+    width: 230px;
+  }
   overflow-y: auto;
 
   img {
@@ -25,35 +28,39 @@ export const Container = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  div::after {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 10px;
+  height: 50px;
+  background-color: #F39200;
+  cursor: pointer;
+
+  svg {
+    margin-left: 15px;
+    margin-right: 5px;
+    color: #fff;
+  }
+  strong {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  &:hover {
+    strong {
+      color: #3F3D56;
+    }
+    svg {
+      color: #3F3D56;
+    }
+  }
+
+  div::before {
     content: '';
     background-color: #fff;
     width: 10px;
     height: 26px;
     margin-right: 10px;
     border-radius: 0px 3px 3px 0px;
-  }
-  display: flex;
-  width: 100%;
-  align-items: center;
-  margin-top: 40px;
-  cursor: pointer;
-
-  svg {
-    margin-right: 5px;
-    color: #fff;
-  }
-  strong {
-    font-size: 1rem;
-    color: #fff;
-  }
-  &:hover {
-    strong {
-      color: #000;
-    }
-    svg {
-      color: #000;
-    }
   }
 `;
 

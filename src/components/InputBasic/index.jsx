@@ -3,7 +3,7 @@ import { useField } from '@unform/core';
 
 import { Container, InputBlock } from './styles';
 
-export default function Input({ name, label, ...rest }) {
+export default function Input({ name, label, icon, ...rest }) {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const inputRef = useRef(null);
@@ -27,10 +27,14 @@ export default function Input({ name, label, ...rest }) {
       path: 'value',
     });
   }, [fieldName, registerField]);
+
+  const Icon = icon;
+
   return (
     <InputBlock>
       {label && <label htmlFor={fieldName}>{label}</label>}
       <Container isFocused={isFocused} isFilled={isFilled}>
+        <Icon size={36}/>
         <input
           ref={inputRef}
           id={fieldName}
