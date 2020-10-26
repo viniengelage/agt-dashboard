@@ -9,7 +9,7 @@ import Home from '../pages/Home'
 import { useAuth } from "../hooks/auth";
 
 const Routes = () => {
-  const {user} = useAuth();
+  const {role} = useAuth();
 
   function handleVerifyRole(role){
     switch (role) {
@@ -26,12 +26,12 @@ const Routes = () => {
     if(userRole === false){
       return <Redirect to="/login" />
     }
-    return handleVerifyRole(user.role).map((route, i) => (
+    return handleVerifyRole(role).map((route, i) => (
       <PrivateRoute key={i} {...route} />
     ))
   }
 
-  const isLogged = !!localStorage.getItem('@AgoraTem:access_token');
+  const hasRole = !!localStorage.getItem('@AgoraTem:role');
 
   return (
     <Switch>
@@ -39,7 +39,7 @@ const Routes = () => {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <PrivateRoute path="/home" component={Home}/>
-      {handleRedirect(isLogged)}
+      {handleRedirect(hasRole)}
     </Switch>
   );
 };

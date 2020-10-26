@@ -9,7 +9,7 @@ import { Container, ButtonContainer, ExitContainer, Exit } from './styles';
 import { SellersRoutes, CustomerRoutes } from '../../routes/config';
 
 const Sidebar = ({ open }) => {
-  const { user, signOut } = useAuth();
+  const { role, signOut } = useAuth();
   const history = useHistory();
 
   const handleLogOut = useCallback(() => {
@@ -32,7 +32,7 @@ const Sidebar = ({ open }) => {
   return (
     <Container>
       <Profile />
-      {handleVerifyRole(user.role).map((route, i) => {
+      {handleVerifyRole(role).map((route, i) => {
         if (!route.menu) {
           return '';
         }

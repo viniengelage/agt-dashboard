@@ -23,7 +23,7 @@ export const Container = styled.div`
   border-radius: 5px;
 
   svg{
-    margin-left: 10px;
+    margin-left: 14px;
     margin-right: 10px;
     color: #3F3D56;
   }

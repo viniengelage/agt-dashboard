@@ -7,17 +7,18 @@ const AuthProvider = ({ children }) => {
   const [data, setData] = useState(() => {
     const access_token = localStorage.getItem('@AgoraTem:access_token');
     const user = localStorage.getItem('@AgoraTem:user');
+    const role = localStorage.getItem('@AgoraTem:role');
     auth.defaults.headers.authorization = `Bearer ${access_token}`;
 
-    if (access_token && user) {
-      return { access_token, user: JSON.parse(user) };
+    if (access_token && user && role) {
+      return { access_token, user: JSON.parse(user), role };
     }
 
     return {};
   });
 
   const signIn = useCallback(async ({ email, password }) => {
-    const response = await auth.post('/login', {
+    const response = await auth.post('auth/login', {
       email,
       password,
     });
@@ -25,10 +26,12 @@ const AuthProvider = ({ children }) => {
     const { access_token } = response.data;
     auth.defaults.headers.authorization = `Bearer ${access_token}`;
 
-    const responseMe = await auth.get('/me');
-    const user = responseMe.data;
+    const responseMe = await auth.get('auth/me');
+    const user = responseMe.data[0];
+    const role = responseMe.data[1].role;
 
     localStorage.setItem('@AgoraTem:access_token', access_token);
+    localStorage.setItem('@AgoraTem:role', role);
     localStorage.setItem('@AgoraTem:user', JSON.stringify(user));
 
     setData({ access_token, user });
@@ -37,6 +40,7 @@ const AuthProvider = ({ children }) => {
   const signOut = useCallback(() => {
     localStorage.removeItem('@AgoraTem:access_token');
     localStorage.removeItem('@AgoraTem:user');
+    localStorage.removeItem('@AgoraTem:role');
 
     setData({});
   }, []);
@@ -46,6 +50,7 @@ const AuthProvider = ({ children }) => {
       value={{
         access_token: data.access_token,
         user: data.user,
+        role: data.role,
         signIn,
         signOut,
       }}
