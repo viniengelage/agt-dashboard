@@ -1,5 +1,5 @@
 import 'react-tabs/style/react-tabs.css';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Form } from '@unform/web';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
@@ -23,12 +23,16 @@ const CustomTab = ({ children }) => (
 CustomTab.tabsRole = 'Tab';
 
 const CreateSeller = () => {
+  const handleSubmit = useCallback((data)=>{
+    console.log(data)
+  },[])
+  
   return (
     <>
       <Header />
       <Container>
         <Title>Adicionar vendedor</Title>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Tabs>
             <TabList>
               <CustomTab>Informações sobre o seller</CustomTab>

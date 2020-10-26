@@ -10,6 +10,14 @@ export const Container = styled.div`
     justify-content: space-around;
     align-items: center;
 
+    @media only screen and (max-width: 1400px) {
+        form{
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
     form{
         max-width: 480px;
         display: flex;
@@ -38,5 +46,12 @@ export const Logo = styled.img`
 `;
 
 export const Image = styled.img`
-  width: 877px;
+    width: 877px;
+
+    @media only screen and (max-width: 1400px) {
+            width: 600px;
+    }
+    @media only screen and (max-width: 600px){
+        display: none;
+    }
 `;

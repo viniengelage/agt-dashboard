@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password }) => {
-    const response = await auth.post('/login', {
+    const response = await auth.post('auth/login', {
       email,
       password,
     });
@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
     const { access_token } = response.data;
     auth.defaults.headers.authorization = `Bearer ${access_token}`;
 
-    const responseMe = await auth.get('/me');
+    const responseMe = await auth.get('auth/me');
     const user = responseMe.data;
 
     localStorage.setItem('@AgoraTem:access_token', access_token);
