@@ -1,11 +1,12 @@
 import 'react-tabs/style/react-tabs.css';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Form } from '@unform/web';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import numOnly from '@lacussoft/num-only'
 
 import Button from '../../components/Button'
 
-import {IoIosMail} from 'react-icons/io'
+import {IoIosImage, IoIosDocument, IoIosCall, IoIosBulb, IoIosTime, IoIosPricetag, IoIosPricetags ,IoIosBicycle} from 'react-icons/io'
 
 import Header from '../../components/header';
 import InputBasic from '../../components/InputBasic';
@@ -23,8 +24,21 @@ const CustomTab = ({ children }) => (
 CustomTab.tabsRole = 'Tab';
 
 const CreateSeller = () => {
-  const handleSubmit = useCallback((data)=>{
+  const [seller, setSeller] = useState({
+    cpf_cnpj: '',
+    cellphone: '',
+    
+  })
+  const [tabIndex, setTabIndex] = useState(0);
+  const handleSubmit1 = useCallback((data)=>{
+    data.cpf_cnpj = numOnly(data.cpf_cnpj);
+    data.cellphone = numOnly(data.cellphone);
     console.log(data)
+    setTabIndex(1)
+  },[])
+  const handleSubmit2 = useCallback((data)=>{
+    data.cpf_cnpj = numOnly(data.cpf_cnpj);
+    data.cellphone = numOnly(data.cellphone);
   },[])
   
   return (
@@ -32,44 +46,47 @@ const CreateSeller = () => {
       <Header />
       <Container>
         <Title>Adicionar vendedor</Title>
-        <Form onSubmit={handleSubmit}>
-          <Tabs>
+          <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
             <TabList>
               <CustomTab>Informações sobre o seller</CustomTab>
               <CustomTab>Informações sobre o negócio</CustomTab>
             </TabList>
 
             <TabPanel>
-              <InputBasic name="img" type="file" label="Enviar logo" icon={IoIosMail}/>
+              <Form onSubmit={handleSubmit1}>
+              <InputBasic name="img" type="file" label="Enviar logo" icon={IoIosImage}/>
               <InputMask
                 name="cpf_cnpj"
                 label="CPF/CNPJ"
                 mask="999.999.999-99"
-                icon={IoIosMail}
+                icon={IoIosDocument}
               />
               <InputMask
                 name="cellphone"
                 label="Telefone"
                 mask="(99) 9 9999-9999"
-                icon={IoIosMail}
+                icon={IoIosCall}
               />
-              <InputBasic name="status" label="Status" icon={IoIosMail}/>
+              <InputBasic name="status" label="Status" icon={IoIosBulb}/>
+              <Button type="submit" title="Próximo"/>
+              </Form>
             </TabPanel>
             <TabPanel>
+              <Form onSubmit={handleSubmit2}>
               <InputMask
                 name="opening_hours"
                 label="Hora de abertura"
                 mask="99:99"
-                icon={IoIosMail}
+                icon={IoIosTime}
               />
               <InputMask
                 name="closing_hours"
                 label="Hora de fechamento"
                 mask="99:99"
-                icon={IoIosMail}
+                icon={IoIosTime}
               />
-              <InputBasic name="price_base" label="Preço básico" icon={IoIosMail}/>
-              <InputBasic name="price_per_km" label="Preço por KM" icon={IoIosMail}/>
+              <InputMask name="price_base" label="Preço básico" mask="R$ 99,99" icon={IoIosPricetag}/>
+              <InputMask name="price_per_km" label="Preço por KM"  mask="R$ 99,99" icon={IoIosPricetags}/>
               <InputSelect
                 name="freight_type"
                 label="Tipo de frete"
@@ -78,12 +95,13 @@ const CreateSeller = () => {
                   { value: 'partner', label: 'Parceiro' },
                 ]}
                 inputText="Selecione"
-                icon={IoIosMail}
+                icon={IoIosBicycle}
               />
+               <Button type="submit" title="Fazer cadastro"/>
+               <Button type="button" title="Voltar" onClick={()=>setTabIndex(0)}/>
+              </Form>
             </TabPanel>
           </Tabs>
-          <Button type="submit" title="Realizar cadastro"/>
-        </Form>
       </Container>
     </>
   );

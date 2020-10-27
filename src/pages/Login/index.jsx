@@ -33,7 +33,7 @@ const Login = () => {
             <Logo src={logoImg} alt="logo-agt"/>
             <InputBasic name="email" type="email"icon={IoIosMail} placeholder="Digite seu email"/>
             <InputBasic name="password" type="password" icon={IoIosLock} placeholder="Digite sua senha"/>
-            <Button type="submit" title="Fazer Login" onClick={()=>console.log('passou por aqui')}/>
+            <Button type="submit" title="Fazer Login"/>
             <Link to="/register">Não tem conta? <strong>Cadastra-se!</strong></Link>
           </Form>
       </Container>

@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('@AgoraTem:role', role);
     localStorage.setItem('@AgoraTem:user', JSON.stringify(user));
 
-    setData({ access_token, user });
+    setData({ access_token, user, role });
   }, []);
 
   const signOut = useCallback(() => {

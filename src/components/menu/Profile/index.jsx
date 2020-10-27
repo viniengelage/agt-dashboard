@@ -8,14 +8,14 @@ import { Container, ProfileImg } from './styles';
 import logo from '../../../assets/avatar.png';
 
 const Profile = (props) => {
-  const { user } = useAuth();
+  const { user, role } = useAuth();
   const history = useHistory()
 
   return (
     <Container>
       <ProfileImg src={logo} alt="Logo user" onClick={()=>history.push('/profile')}/>
-      <p>{user.email}</p>
-      <strong>{user.role}</strong>
+      <p>{user.name}</p>
+      <strong>{role}</strong>
     </Container>
   );
 };

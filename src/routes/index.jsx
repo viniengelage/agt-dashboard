@@ -11,8 +11,8 @@ import { useAuth } from "../hooks/auth";
 const Routes = () => {
   const {role} = useAuth();
 
-  function handleVerifyRole(role){
-    switch (role) {
+  function handleVerifyRole(userRole){
+    switch (userRole) {
       case 'customer':
         return CustomerRoutes
       case 'seller':
