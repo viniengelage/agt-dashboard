@@ -13,9 +13,6 @@ export const Container = styled.div`
   @media only screen and (max-width: 1400px) {
     width: 300px;
   }
-  @media only screen and (max-width: 500px) {
-    width: 230px;
-  }
   overflow-y: auto;
 
   img {

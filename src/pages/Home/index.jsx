@@ -5,6 +5,7 @@ const Home = (props) => {
   return (
     <>
       <Header />
+      <h1>Em breve uma home de qualidade</h1>
     </>
   );
 };

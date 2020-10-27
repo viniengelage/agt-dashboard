@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/auth';
 import Profile from './Profile';
 import { Container, ButtonContainer, ExitContainer, Exit } from './styles';
 
-import { SellersRoutes, CustomerRoutes } from '../../routes/config';
+import { SellersRoutes, ManagerRoutes, AdminRoutes } from '../../routes/config';
 
 const Sidebar = ({ open }) => {
   const { role, signOut } = useAuth();
@@ -20,10 +20,12 @@ const Sidebar = ({ open }) => {
 
   const handleVerifyRole = useCallback((role) => {
     switch (role) {
-      case 'customer':
-        return CustomerRoutes 
+      case 'manager':
+        return ManagerRoutes 
       case 'seller':
         return SellersRoutes
+      case 'admin':
+        return AdminRoutes
       default:
         break
     }

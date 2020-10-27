@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/header';
-import auth from '../../services/api'
+import Header from '../../../components/header';
+import auth from '../../../services/api'
 
 import {IoIosTrash} from 'react-icons/io';
 
@@ -8,7 +8,7 @@ import {Container, TableHeader, Title, TableTitle, TableCel, TableCelTitle, Tabl
 
 const ListSeller = (props) => {
     const [sellers, setSellers] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    // const [isLoading, setIsLoading] = useState(true)
 
     useEffect(()=>{
         async function getItems(){
@@ -16,7 +16,7 @@ const ListSeller = (props) => {
                 const response = await auth.get('/sellers');
 
                 setSellers(response.data.data);
-                setIsLoading(false);
+                // setIsLoading(false);
             } catch (error) {
                 console.log(error)
             }
@@ -34,7 +34,7 @@ const ListSeller = (props) => {
                     <TableTitle>CPF/CNPJ</TableTitle>
                     <TableTitle>STATUS</TableTitle>
                     <TableRevealedTitle>REVELADOS</TableRevealedTitle>
-                    <IoIosTrash size={28} color="#fff"/>
+                    <IoIosTrash size={28} color="#ffff"/>
                 </TableHeader>
                 {sellers.map((seller) => (
                     <TableCel key={seller.id}>
@@ -42,7 +42,7 @@ const ListSeller = (props) => {
                         <TableCelTitle>{seller.cpf_cnpj}</TableCelTitle>
                         <TableCelTitle>{seller.status}</TableCelTitle>
                         <TableRevealed>72</TableRevealed>
-                        <IoIosTrash size={28} color="#fff"/>
+                        <IoIosTrash size={28} color="#c53030"/>
                     </TableCel>
                 ))}
         </Container>

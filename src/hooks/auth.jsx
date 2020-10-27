@@ -27,14 +27,27 @@ const AuthProvider = ({ children }) => {
     auth.defaults.headers.authorization = `Bearer ${access_token}`;
 
     const responseMe = await auth.get('auth/me');
-    const user = responseMe.data[0];
-    const role = responseMe.data[1].role;
+
+    if(responseMe.data[1]){
+      const user = responseMe.data[0];
+      const role = responseMe.data[1].role;
+  
+      localStorage.setItem('@AgoraTem:access_token', access_token);
+      localStorage.setItem('@AgoraTem:role', role);
+      localStorage.setItem('@AgoraTem:user', JSON.stringify(user));
+  
+      return setData({ access_token, user, role });
+    }
+
+    const user = responseMe.data;
+    const role = responseMe.data.role;
 
     localStorage.setItem('@AgoraTem:access_token', access_token);
     localStorage.setItem('@AgoraTem:role', role);
     localStorage.setItem('@AgoraTem:user', JSON.stringify(user));
 
     setData({ access_token, user, role });
+
   }, []);
 
   const signOut = useCallback(() => {

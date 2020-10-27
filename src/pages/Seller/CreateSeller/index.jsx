@@ -4,31 +4,18 @@ import { Form } from '@unform/web';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import numOnly from '@lacussoft/num-only'
 
-import Button from '../../components/Button'
 
 import {IoIosImage, IoIosDocument, IoIosCall, IoIosBulb, IoIosTime, IoIosPricetag, IoIosPricetags ,IoIosBicycle} from 'react-icons/io'
 
-import Header from '../../components/header';
-import InputBasic from '../../components/InputBasic';
-import InputMask from '../../components/InputMask';
-import InputSelect from '../../components/InputSelect';
+import Header from '../../../components/header';
+import Button from '../../../components/Button'
+import InputBasic from '../../../components/InputBasic';
+import InputMask from '../../../components/InputMask';
+import InputSelect from '../../../components/InputSelect';
 
 import { Container, Title, CustomTabTitle } from './styles';
 
-const CustomTab = ({ children }) => (
-  <Tab>
-    <CustomTabTitle>{children}</CustomTabTitle>
-  </Tab>
-);
-
-CustomTab.tabsRole = 'Tab';
-
 const CreateSeller = () => {
-  const [seller, setSeller] = useState({
-    cpf_cnpj: '',
-    cellphone: '',
-    
-  })
   const [tabIndex, setTabIndex] = useState(0);
   const handleSubmit1 = useCallback((data)=>{
     data.cpf_cnpj = numOnly(data.cpf_cnpj);
@@ -41,6 +28,14 @@ const CreateSeller = () => {
     data.cellphone = numOnly(data.cellphone);
   },[])
   
+  const CustomTab = ({ children, selected }) => (
+    <Tab>
+      <CustomTabTitle selected={tabIndex}>{children}</CustomTabTitle>
+    </Tab>
+  );
+  
+  CustomTab.tabsRole = 'Tab';
+
   return (
     <>
       <Header />

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {shade} from 'polished'
 
 export const Container = styled.div`
   display: flex;
@@ -17,14 +16,14 @@ export const Title = styled.h2`
 
 export const TableHeader = styled.div`
   height: 40px;
-  width: 1260px;
+  width: 660px;
   background-color: #F39200;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 6px 6px 0 0;
-  padding-left: 30px;
-  padding-right: 30px;
+  justify-content: space-around;
+  border-radius: 6px;
+  padding: 0 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const TableTitle = styled.p`
@@ -32,23 +31,24 @@ export const TableTitle = styled.p`
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  width: 300px;
+  width: 200px;
 `;
 
 export const TableCel = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 1260px;
+  width: 660px;
   height: 60px;
   margin-top: 0;
   background-color: #3F3D56;
-  padding-bottom:10px;
-  padding-left: 30px;
-  padding-right: 30px;
+  margin-top: 10px;
+  padding: 0 30px;
   position: relative;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-  p::after{
+  /* p::after{
     content: '';
     background-color: #F39200;
     height:5px;
@@ -56,30 +56,14 @@ export const TableCel = styled.div`
     bottom: 0;
     right: 0px;
     position: absolute;
-  }
+  } */
 
 `;
 
 export const TableCelTitle = styled.p`
-  width: 300px;
+  width: 200px;
   color: #ffff;
   font-size: 18px;
   font-weight: 400;
   text-align: left;
-`;
-
-export const TableRevealed = styled.p`
-  width: 300px;
-  color: #ffff;
-  font-size: 18px;
-  font-weight: 400;
-  text-align: center;
-`;
-
-export const TableRevealedTitle = styled.p`
-  color: #ffff;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  width: 300px;
 `;

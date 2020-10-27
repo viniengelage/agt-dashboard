@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 
-import {SellersRoutes, CustomerRoutes} from '../routes/config'
+import { SellersRoutes, ManagerRoutes, AdminRoutes } from '../routes/config'
 
 import Login from '../pages/Login'
 import Register from "../pages/Register";
@@ -13,10 +13,12 @@ const Routes = () => {
 
   function handleVerifyRole(userRole){
     switch (userRole) {
-      case 'customer':
-        return CustomerRoutes
+      case 'manager':
+        return ManagerRoutes
       case 'seller':
-        return SellersRoutes 
+        return SellersRoutes
+      case 'admin':
+        return AdminRoutes  
       default:
         break;
     }
