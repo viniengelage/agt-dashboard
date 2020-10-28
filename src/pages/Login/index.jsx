@@ -19,9 +19,15 @@ const Login = () => {
 
   const handleSubmit = useCallback(async (data)=>{
     setLoading(true)
-    await signIn(data);
-    setLoading(false);
-    history.push('/home');
+    try{
+      await signIn(data);
+      setLoading(false);
+      history.push('/home');
+    }catch(error){
+      console.log(error);
+      setLoading(false)
+    }
+    
   },[signIn, history])
 
   return (
