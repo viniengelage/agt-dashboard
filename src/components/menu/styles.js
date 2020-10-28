@@ -31,6 +31,8 @@ export const ButtonContainer = styled.div`
   margin-top: 10px;
   height: 50px;
   background-color: #F39200;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
   cursor: pointer;
 
   svg {

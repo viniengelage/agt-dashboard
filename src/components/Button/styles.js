@@ -18,6 +18,8 @@ export const InputButton = styled.button`
   border: none;
   border-radius: 3px;
   background-color: #f39200;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 
   &:hover {
     background-color: ${shade(0.2, '#f39200')};

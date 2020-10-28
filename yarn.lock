@@ -9180,6 +9180,11 @@ react-loadingmask@^4.0.6:
     react "^16.13.1"
     react-dom "^16.13.1"
 
+react-re-super-tabs@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-re-super-tabs/-/react-re-super-tabs-1.1.0.tgz#c24d0e619625c0e59de5cc1729e83d0ead872bc1"
+  integrity sha512-hQA1xkH1NdW5HA8vzwBnWj1IYSzfQRTqv4VNIi6Rnqyo3VAKsUK1HVkqF1RZ/mdYPlsmnMJkXzkn7sat6KbUbw==
+
 react-router-dom@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.2.0.tgz#9e65a4d0c45e13289e66c7b17c7e175d0ea15662"

@@ -19,6 +19,7 @@ const Sidebar = ({ open }) => {
   }, [history, signOut]);
 
   const handleVerifyRole = useCallback((role) => {
+    console.log(role)
     switch (role) {
       case 'manager':
         return ManagerRoutes 
@@ -39,6 +40,7 @@ const Sidebar = ({ open }) => {
           return '';
         }
         const Icon = route.icon;
+        console.log('toma no cu irmao')
         return (
           <ButtonContainer key={i} onClick={() => history.push(route.path)}>
             <Icon size={24} className={route.icon} />

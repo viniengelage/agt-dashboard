@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem('@AgoraTem:role', role);
       localStorage.setItem('@AgoraTem:user', JSON.stringify(user));
   
-      return setData({ access_token, user, role });
+      setData({ access_token, user, role });
     }
 
     const user = responseMe.data;

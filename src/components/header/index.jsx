@@ -22,7 +22,6 @@ const Header = (props) => {
   },[])
 
   function renderSize(windowWidth){
-    console.log(windowWidth)
     if(windowWidth >= 1920){
       return 360
     }
