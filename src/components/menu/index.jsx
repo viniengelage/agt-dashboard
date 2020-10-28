@@ -3,8 +3,6 @@ import { IoMdExit } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 
-import {IconBase} from 'react-icons'
-
 import Profile from './Profile';
 import { Container, ButtonContainer, ExitContainer, Exit } from './styles';
 
@@ -20,8 +18,8 @@ const Sidebar = ({ open }) => {
     history.push('/login');
   }, [history, signOut]);
 
-  const handleVerifyRole = useCallback((roleUser) => {
-    switch (roleUser) {
+  const handleVerifyRole = useCallback((role) => {
+    switch (role) {
       case 'manager':
         return ManagerRoutes 
       case 'seller':
@@ -33,16 +31,17 @@ const Sidebar = ({ open }) => {
     }
   },[])
 
-  let Icon = '';
-
   return (
     <Container>
       <Profile />
-      {handleVerifyRole(role).map(route => {
-      console.log('sadsadsadsadasd')
-      return(
-          <ButtonContainer onClick={() => history.push(route.path)}>
-            <IconBase className={route.icon} size={26} color="#fff" />
+      {handleVerifyRole(role).map((route, i) => {
+        if (!route.menu) {
+          return '';
+        }
+        const Icon = route.icon;
+        return (
+          <ButtonContainer key={i} onClick={() => history.push(route.path)}>
+            <Icon size={24} className={route.icon} />
             <strong>{route.title}</strong>
           </ButtonContainer>
       )})}

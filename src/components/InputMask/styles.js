@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const InputBlock = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top:10px;
 
   label {
     font-size: 18px;

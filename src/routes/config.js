@@ -2,7 +2,9 @@ import {
   IoIosCube,
   IoIosAddCircle,
   IoIosBriefcase,
-  IoIosCompass
+  IoIosCompass,
+  IoIosListBox,
+  IoIosCart
 } from 'react-icons/io';
 
 
@@ -10,6 +12,8 @@ import CreateSeller from '../pages/Seller/CreateSeller'
 import ListSeller from '../pages/Seller/ListSeller';
 
 import ListManager from '../pages/Manager/ListManager';
+
+import CreateLocale from '../pages/Admin/CreateLocale'
 
 export const AdminRoutes = [
   {
@@ -23,10 +27,10 @@ export const AdminRoutes = [
   {
     title: "Lista de managers",
     path: "/managers/index",
-    icon: ListManager,
+    icon: IoIosListBox,
     exact: true,
     menu: true,
-    component: ListSeller,
+    component: ListManager,
   },
   {
     title: "Adicionar localização",
@@ -34,7 +38,7 @@ export const AdminRoutes = [
     icon: IoIosCompass,
     exact: true,
     menu: true,
-    component: ListManager,
+    component: CreateLocale,
   },
 ];
 
@@ -59,17 +63,17 @@ export const SellersRoutes = [
 
 export const ManagerRoutes = [
   {
-    title: "Customer",
-    path: "/seller/adicionar",
-    icon: IoIosAddCircle,
+    title: "Adicionar vendedor",
+    path: "/seller/create",
+    icon: IoIosCart,
     exact: true,
     menu: true,
     component: CreateSeller,
   },
   {
     title: "Lista de vendedores",
-    path: "/seller/lista",
-    icon: IoIosCube,
+    path: "/seller/index",
+    icon: IoIosListBox,
     exact: true,
     menu: true,
     component: ListSeller,
