@@ -2,7 +2,9 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import ReactInputMask from 'react-input-mask';
 import { useField } from '@unform/core';
 
-import { Container, InputBlock } from './styles';
+import { IoIosAlert } from 'react-icons/io';
+
+import { Container, InputBlock, Error } from './styles';
 
 const InputMask = ({ name, label, icon, ...rest }) => {
   const inputRef = useRef(null);
@@ -39,7 +41,7 @@ const InputMask = ({ name, label, icon, ...rest }) => {
   return (
     <InputBlock>
       {label && <label htmlFor={fieldName}>{label}</label>}
-      <Container isFocused={isFocused} isFilled={isFilled}>
+      <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
         <Icon size={36}/>
         <ReactInputMask
           ref={inputRef}
@@ -50,7 +52,11 @@ const InputMask = ({ name, label, icon, ...rest }) => {
           {...rest}
         />
 
-        {error && <span style={{ color: '#f00' }}>{error}</span>}
+        {error && (
+          <Error title={error}>
+            <IoIosAlert color="#c53030" size={28} />
+          </Error>
+        )}
       </Container>
     </InputBlock>
   );

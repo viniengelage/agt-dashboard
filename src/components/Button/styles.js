@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import {shade} from 'polished'
 
 export const InputButton = styled.button`
-  margin-top: 20px;
-
   display: flex;
   width: 100%;
   height: 60px;
   justify-content: center;
   align-items: center;
+  margin-top:20px;
 
   font-size: 20px;
   font-weight: bold;

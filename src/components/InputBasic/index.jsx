@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useField } from '@unform/core';
 
-import { Container, InputBlock } from './styles';
+import { Container, InputBlock, Error } from './styles';
+
+import { IoIosAlert } from 'react-icons/io';
 
 export default function Input({ name, label, icon, ...rest }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -33,7 +35,7 @@ export default function Input({ name, label, icon, ...rest }) {
   return (
     <InputBlock>
       {label && <label htmlFor={fieldName}>{label}</label>}
-      <Container isFocused={isFocused} isFilled={isFilled}>
+      <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
         <Icon size={36}/>
         <input
           ref={inputRef}
@@ -44,7 +46,11 @@ export default function Input({ name, label, icon, ...rest }) {
           {...rest}
         />
 
-        {error && <span style={{ color: '#f00' }}>{error}</span>}
+        {error && (
+          <Error title={error}>
+            <IoIosAlert color="#c53030" size={28} />
+          </Error>
+        )}
       </Container>
     </InputBlock>
   );

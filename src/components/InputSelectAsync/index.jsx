@@ -2,10 +2,12 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ReactSelect from 'react-select/async';
 import { useField } from '@unform/core';
 
-import { Container, InputBlock } from './styles';
+import { IoIosAlert } from 'react-icons/io';
+
+import { Container, InputBlock, Error } from './styles';
 
 const InputSelectAsync = ({ name, options, label, inputText, icon, ...rest }) => {
-  const { fieldName, defaultValue, registerField } = useField(name);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
 
   const selectRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -81,6 +83,12 @@ const InputSelectAsync = ({ name, options, label, inputText, icon, ...rest }) =>
           classNamePrefix="react-select"
           {...rest}
         />
+
+        {error && (
+          <Error title={error}>
+            <IoIosAlert color="#c53030" size={28} />
+          </Error>
+        )}
       </Container>
     </InputBlock>
   );

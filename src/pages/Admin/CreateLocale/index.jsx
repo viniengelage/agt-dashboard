@@ -14,7 +14,7 @@ import InputBasic from '../../../components/InputBasic'
 import InputSelectAsync from '../../../components/InputSelectAsync'
 
 import {  IoIosBarcode, IoIosFlag, IoIosHome, IoIosBusiness, IoIosBriefcase } from 'react-icons/io'
-import { Container, Title, ButtonContainer, MenuButton } from './styles';
+import { Container, Title } from './styles';
 
 const CreateLocale = () => {
     const [tabIndex, setTabIndex] = useState(0);

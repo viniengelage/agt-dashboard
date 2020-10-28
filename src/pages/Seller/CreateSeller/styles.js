@@ -16,6 +16,10 @@ export const Container = styled.div`
   label {
     margin-top: 15px;
   }
+
+  .loadingContainer {
+    margin-top: 30px;
+  }
   .tabContainer{
     display: flex;
     width: 1000px;
@@ -54,4 +58,23 @@ export const Container = styled.div`
 export const Title = styled.h2`
   color: #3f3d56;
   font-size: 32px;
+`;
+
+export const CepContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  form{
+    display: flex;
+    width: 100%;
+  }
+  div{
+    width: 99%;
+  }
+  button{
+    margin-top: 55px !important;
+    width: 20%;
+  }
 `;

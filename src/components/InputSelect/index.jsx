@@ -2,10 +2,12 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ReactSelect from 'react-select';
 import { useField } from '@unform/core';
 
-import { Container, InputBlock } from './styles';
+import { IoIosAlert } from 'react-icons/io';
+
+import { Container, InputBlock, Error } from './styles';
 
 const Select = ({ name, options, label, inputText, icon, ...rest }) => {
-  const { fieldName, defaultValue, registerField } = useField(name);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
 
   const selectRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -62,7 +64,7 @@ const Select = ({ name, options, label, inputText, icon, ...rest }) => {
   return (
     <InputBlock>
       {label && <label htmlFor={fieldName}>{label}</label>}
-      <Container isFilled={isFilled} isFocused={isFocused}>
+      <Container isFilled={isFilled} isFocused={isFocused} isErrored={!!error}>
         <Icon size={36}/>
         <ReactSelect
           onFocus={handleInputFocus}
@@ -74,6 +76,12 @@ const Select = ({ name, options, label, inputText, icon, ...rest }) => {
           placeholder={inputText}
           {...rest}
         />
+
+        {error && (
+          <Error title={error}>
+            <IoIosAlert color="#c53030" size={28} />
+          </Error>
+        )}
       </Container>
     </InputBlock>
   );
