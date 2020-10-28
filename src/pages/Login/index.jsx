@@ -7,7 +7,7 @@ import {IoIosLock, IoIosMail} from 'react-icons/io';
 
 import InputBasic from '../../components/InputBasic';
 import Button from '../../components/Button';
-import Loading from '../../components/Loading'
+import Loading from '../../components/Loading';
 
 import logoImg from '../../assets/agt-logo.svg';
 import backgroundImg from '../../assets/background-login.svg';
@@ -19,9 +19,14 @@ const Login = () => {
 
   const handleSubmit = useCallback(async (data)=>{
     setLoading(true)
-    await signIn(data);
-    setLoading(false);
-    history.push('/home');
+    try {
+      await signIn(data);
+      setLoading(false);
+      history.push('/home');
+    } catch (error) {
+      setLoading(false)
+      console.log(error)
+    }
   },[signIn, history])
 
   return (

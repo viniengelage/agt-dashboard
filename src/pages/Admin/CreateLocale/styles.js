@@ -1,21 +1,25 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
 
-  @media only screen and (max-width: 1400px) {
-    margin-top: 10px;
+  form{
+    width: 600px
   }
 
-  label {
-    margin-top: 15px;
+  .tabContext{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
+
   .tabContainer{
     display: flex;
     width: 1000px;
@@ -43,15 +47,20 @@ export const Container = styled.div`
       background-color: #f39200;
     }
   }
-
   .selectedTab{
     color: #fff;
     background-color: #f39200;
   }
-  
 `;
 
 export const Title = styled.h2`
   color: #3f3d56;
   font-size: 32px;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+`;
+export const MenuButton = styled.button`
+  background-color: #F39200;
 `;
