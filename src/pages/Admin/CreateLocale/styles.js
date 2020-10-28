@@ -34,7 +34,7 @@ export const Container = styled.div`
     font-size: 20px;
     font-weight: bold;
     width: 300px;
-    height: 60px;
+    height: 50px;
     border-radius: 6px;
     background-color: #3f3d56;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
