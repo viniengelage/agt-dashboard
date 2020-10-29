@@ -28,12 +28,12 @@ export const Container = styled.div`
 
 
   svg{
-    margin-left: 14px;
+    margin-left: 10px;
     margin-right: 10px;
     color: #3F3D56;
   }
 
-  ${(props) =>
+    ${(props) =>
     props.isErrored &&
     css`
       border-color: #c53030;
@@ -42,18 +42,19 @@ export const Container = styled.div`
         color: #c53030;
       }
     `}
-  ${(props) =>
+    ${(props) =>
     props.isFocused &&
     css`
       color: #3F3D56;
       border-color: #f39200;
       box-shadow: 0 0 0 1px #f39200;
       border-radius: 5px;
+
       svg{
         color: #f39200;
       }
     `}
-  ${(props) =>
+    ${(props) =>
     props.isFilled &&
     css`
       color: #3F3D56;
@@ -65,27 +66,40 @@ export const Container = styled.div`
       }
     `}
 
-    select {
-      background: transparent;
-      border: 0;
-      width: 90%;
-      padding-right: 70px;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      color: #3F3D56;
-      &:focus {
-        outline: none;
-      }
+  input {
+    background: transparent;
+    border: 0;
+    width: 90%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #3F3D56;
+    &:focus {
+      outline: none;
+    }
 
-      &::placeholder{
-        color:#3F3D56;
-        font-size: 16px;
-      }
+    &::placeholder{
+      color:#3F3D56;
+      font-size: 16px;
+    }
+  }
+  input[type='file']::-webkit-file-upload-button {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    border: 0;
+    border-right: 1px solid #bababa;
+    cursor: pointer;
+    margin: 0;
+    padding: 10px 10px 10px 0;
+    background: none;
+    color: #3f3d56;
+    margin-right: 10px;
+    box-shadow: none;
+    outline: none;
   }
 `;
 export const Error = styled(Tooltip)`
-  margin-right: 16px;
   svg {
     margin: 0;
   }

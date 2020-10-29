@@ -49,6 +49,9 @@ export const Container = styled.div`
       border-color: #f39200;
       box-shadow: 0 0 0 1px #f39200;
       border-radius: 5px;
+      svg{
+        color: #f39200;
+      }
     `}
   ${(props) =>
     props.isFilled &&
@@ -57,6 +60,9 @@ export const Container = styled.div`
       border-color: #f39200;
       box-shadow: 0 0 0 1px #f39200;
       border-radius: 5px;
+      svg{
+        color: #f39200;
+      }
     `}
 
     select {

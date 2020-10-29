@@ -7,6 +7,10 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  .loadingContainer{
+    margin-top: 20px;
+  }
+
   body {
     background: #ffff;;
     color: #3F3D56;

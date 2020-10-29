@@ -28,7 +28,7 @@ const Header = (props) => {
     if(windowWidth >= 1400){
       return 360
     }
-    if(windowWidth <= 1400){
+    if(windowWidth <= 700){
       return 300
     }
   }

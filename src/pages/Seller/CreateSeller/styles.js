@@ -52,6 +52,29 @@ export const Container = styled.div`
     color: #fff;
     background-color: #f39200;
   }
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .tabContainer{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .titleTabe{
+      margin-left: -35px;
+      margin-top: 10px;
+    }
+    .panelContainerContact{
+      width: 100%;
+      padding: 0 40px;
+    }
+  }
   
 `;
 
