@@ -1,6 +1,6 @@
 import 'react-tabs/style/react-tabs.css';
 import "react-loadingmask/dist/react-loadingmask.css";
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import LoadingMask from "react-loadingmask";
 import { Form } from '@unform/web';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -180,11 +180,11 @@ const CreateSeller = () => {
 
     const keyApi = "AIzaSyALgdzkuB1O_yxkYwecS5bKjd9WQZZgb0w"
 
-    const teste = removeWhitespace(response.data.address)
-    const teste2 = removeWhitespace(response.data.city)
+    const street = removeWhitespace(response.data.address)
+    const city = removeWhitespace(response.data.city)
 
     const coordsResponse = await axios
-    .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${teste}%${teste2}&key=${keyApi}`)
+    .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${street}%${city}&key=${keyApi}`)
 
     const addressComponents = coordsResponse.data.results[0].address_components;
     const location = coordsResponse.data.results[0].geometry.location;

@@ -12,7 +12,6 @@ import * as Yup from 'yup';
 import getValidationErrors from '../../utils/getValidationsErrors';
 import InputBasic from '../../components/InputBasic';
 import Button from '../../components/Button';
-import Loading from '../../components/Loading';
 
 import logoImg from '../../assets/agt-logo.svg';
 import backgroundImg from '../../assets/background-login.svg';
