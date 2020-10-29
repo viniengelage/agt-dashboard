@@ -11,10 +11,10 @@ export const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   @media only screen and (max-width: 1400px) {
-    width: 360px;
+    width: 300px;
   }
   @media only screen and (max-width: 700px) {
-    width: 300px;
+    width: 360px;
   }
   overflow-y: auto;
 
