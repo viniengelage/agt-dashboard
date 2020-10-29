@@ -158,9 +158,7 @@ const CreateSeller = () => {
             <CepContainer>
               <Form onSubmit={handleGetCep} ref={formRef}>
                 <InputMask mask="99999-999" name="postcode" placeholder="Digite seu CEP" type="text" icon={IoIosMap} label="CEP"/>
-                <LoadingMask loading={loading}>
                   <Button type="submit" title="Buscar"/>
-                </LoadingMask>
               </Form>
             </CepContainer>
 

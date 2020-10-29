@@ -66,6 +66,11 @@ export const CepContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+
+  .loadingCep{
+    display: flex;
+  }
+
   form{
     display: flex;
     width: 100%;
