@@ -16,7 +16,7 @@ import Header from '../../../components/header';
 import Button from '../../../components/Button'
 import InputBasic from '../../../components/InputBasic';
 import InputSelect from '../../../components/InputSelect';
-// import InputMask from '../../../components/InputMask';
+import InputMask from '../../../components/InputMask';
 
 import { Container, Title, CepContainer } from './styles';
 import auth from '../../../services/api';
@@ -28,6 +28,12 @@ const CreateSeller = () => {
   const [userInfos, setUserInfos] = useState({
     userId: '',
     addressId: '',
+  })
+  const [address, setAddress] = useState({
+    street: '',
+    district: '',
+    city: '',
+    state: '',
   })
   const [seller, setSeller] = useState({
     name: '',
@@ -101,13 +107,25 @@ const CreateSeller = () => {
   },[])
 
   const handleGetCep = useCallback( async (data) => {
-    data.preventDefault();
-    console.log('passouaqui')
-    console.log(data)
+    setLoading(true)
 
-    const response = await axios.get(`https://viacep.com.br/ws/${data.postcode}/json/`)
+   try {
+    const response = await axios.get(`https://ws.apicep.com/cep/${data.postcode}.json`);
 
     console.log(response)
+
+    setAddress( () => ({
+      street: response.data.address,
+      district: response.data.district,
+      city: response.data.city,
+      state: response.data.state,
+    }))
+
+    setLoading(false)
+    toast.success('Endereço adicionado')
+   } catch (error) {
+     toast.error(error.message)
+   }
   },[])
 
   return (
@@ -137,13 +155,16 @@ const CreateSeller = () => {
             </Form>
           </TabPanel>
           <TabPanel>
-            <Form onSubmit={handleSubmit2} initialData={seller}>
-              <CepContainer>
-                <Form onSubmit={handleGetCep} ref={formRef}>
-                  <InputBasic name="postcode" placeholder="Digite seu CEP" type="text" icon={IoIosMap} label="CEP"/>
+            <CepContainer>
+              <Form onSubmit={handleGetCep} ref={formRef}>
+                <InputMask mask="99999-999" name="postcode" placeholder="Digite seu CEP" type="text" icon={IoIosMap} label="CEP"/>
+                <LoadingMask loading={loading}>
                   <Button type="submit" title="Buscar"/>
-                </Form>
-              </CepContainer>
+                </LoadingMask>
+              </Form>
+            </CepContainer>
+
+            <Form onSubmit={handleSubmit2} initialData={address}>
               <InputBasic name="street" placeholder="Digite seu endereço" type="text" icon={IoIosNavigate} label="Rua"/>
               <InputBasic name="district" placeholder="Digite seu bairro" type="text" icon={IoIosBusiness} label="Bairro"/>
               <InputBasic name="complement" placeholder="Digite o complemento" type="text" icon={IoIosAttach} label="Complemento"/>
@@ -151,6 +172,7 @@ const CreateSeller = () => {
                 <Button title="Próximo" onClick={() => setTabIndex(1)} />
               </LoadingMask>
             </Form>
+            
           </TabPanel>
 
           <TabPanel>
