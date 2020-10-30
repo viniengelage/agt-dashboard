@@ -22,14 +22,14 @@ const Header = (props) => {
   },[])
 
   function renderSize(windowWidth){
-    if(windowWidth >= 1920){
+    if(windowWidth <= 1920){
       return 360
     }
-    if(windowWidth >= 1400){
+    if(windowWidth <= 1400){
       return 300
     }
-    if(windowWidth <= 700){
-      return 260
+    if(windowWidth >= 700){
+      return 220
     }
   }
   return (

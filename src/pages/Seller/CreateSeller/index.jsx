@@ -175,34 +175,34 @@ const CreateSeller = () => {
   const handleGetCep = useCallback( async (data) => {
     setLoading(true)
 
-   try {
-    const response = await axios.get(`https://ws.apicep.com/cep/${data.postcode}.json`);
+    try {
+      const response = await axios.get(`https://ws.apicep.com/cep/${data.postcode}.json`);
 
-    const keyApi = "AIzaSyALgdzkuB1O_yxkYwecS5bKjd9WQZZgb0w"
+      const keyApi = "AIzaSyALgdzkuB1O_yxkYwecS5bKjd9WQZZgb0w"
 
-    const street = removeWhitespace(response.data.address)
-    const city = removeWhitespace(response.data.city)
+      const street = removeWhitespace(response.data.address)
+      const city = removeWhitespace(response.data.city)
 
-    const coordsResponse = await axios
-    .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${street}%${city}&key=${keyApi}`)
+      const coordsResponse = await axios
+      .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${street}%${city}&key=${keyApi}`)
 
-    const addressComponents = coordsResponse.data.results[0].address_components;
-    const location = coordsResponse.data.results[0].geometry.location;
+      const addressComponents = coordsResponse.data.results[0].address_components;
+      const location = coordsResponse.data.results[0].geometry.location;
 
-    setAddress( () => ({
-      postcode: numOnly(data.postcode),
-      street: addressComponents[0].long_name,
-      district: addressComponents[1].long_name,
-      latitude: location.lat,
-      longitude: location.lng
-    }))
+      setAddress( () => ({
+        postcode: numOnly(data.postcode),
+        street: addressComponents[0].long_name,
+        district: response.data.district,
+        latitude: location.lat,
+        longitude: location.lng
+      }))
 
-    setLoading(false)
-    toast.success('Endereço adicionado')
-   } catch (error) {
+      setLoading(false)
+      toast.success('Endereço adicionado')
+    } catch (error) {
      setLoading(false)
      toast.error(error.message)
-   }
+    }
   },[])
 
   const mapResponseToValuesAndLabels = (data) => ({
@@ -216,7 +216,7 @@ const CreateSeller = () => {
     const options = response.data.data.map((value)=>mapResponseToValuesAndLabels(value))
 
     return options;
-},[])
+  },[])
 
   return (
     <>

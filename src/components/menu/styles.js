@@ -10,11 +10,14 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  @media only screen and (max-width: 1900px) {
+    width: 300px;
+  }
   @media only screen and (max-width: 1400px) {
     width: 300px;
   }
   @media only screen and (max-width: 700px) {
-    width: 360px;
+    width: 220px;
   }
   overflow-y: auto;
 
