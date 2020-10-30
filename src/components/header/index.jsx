@@ -39,7 +39,7 @@ const Header = (props) => {
         <Logo src={logo} alt="logo-agora-tem" onClick={()=>history.push('/home')} />
         <IoMdPerson size={36} />
       </Container>
-      <CheeseburgerMenu isOpen={menuOpen} closeCallback={closeMenu} width={renderSize(window.innerWidth)}>
+      <CheeseburgerMenu isOpen={menuOpen} closeCallback={closeMenu} width={320}>
         <Menu />
       </CheeseburgerMenu>
     </>

@@ -4,13 +4,13 @@ export const Container = styled.div`
   z-index: 1;
   background-color: #3f3d56;
   position: fixed;
-  width: 360px;
+  width: 320px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  @media only screen and (max-width: 1900px) {
+  /* @media only screen and (max-width: 1900px) {
     width: 300px;
   }
   @media only screen and (max-width: 1400px) {
@@ -18,7 +18,7 @@ export const Container = styled.div`
   }
   @media only screen and (max-width: 700px) {
     width: 220px;
-  }
+  } */
   overflow-y: auto;
 
   img {
