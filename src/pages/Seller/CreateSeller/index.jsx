@@ -14,7 +14,8 @@ import {
 IoIosImage, IoIosPerson, IoIosNavigate,
 IoIosMap, IoIosBusiness, IoIosAttach,
 IoIosMail, IoIosCall, IoIosLock, IoIosContact,
-IoIosHome, IoIosFlag, IoIosKey
+IoIosHome, IoIosFlag, IoIosKey, IoIosFingerPrint,
+IoIosDocument, IoIosCopy, IoIosBody,IoIosCamera, IoIosBarcode
 } from 'react-icons/io'
 
 import getValidationErrors from '../../../utils/getValidationsErrors';
@@ -32,6 +33,7 @@ import auth from '../../../services/api';
 const CreateSeller = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [isDriver, setIsDriver] = useState(true)
   const formRef = useRef(null);
   const [userId, setUserId] = useState(0)
   const [address, setAddress] = useState({
@@ -72,9 +74,14 @@ const CreateSeller = () => {
         abortEarly: false,
       });
 
+
       const response = await auth.post('/auth/register', infos);
 
       setUserId(response.data.user.id)
+
+      if(infos.role === 'driver'){
+        setIsDriver(true)
+      }
 
       setTabIndex(1);
       setLoading(false)
@@ -137,29 +144,90 @@ const CreateSeller = () => {
     }
   },[address.district, address.latitude, address.longitude, address.postcode, address.street, userId])
 
+  const handleDriverSubmit = useCallback( async (infos) => {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      cellphone: Yup.string().required(),
+      img: Yup.string().required(),
+      selfie: Yup.string().required(),
+      cpf_cnpj: Yup.string().required(),
+      cnh: Yup.string().required(),
+      cnh_front: Yup.string().required(),
+      cnh_back: Yup.string().required(),
+      rg: Yup.string().required(),
+      rg_front: Yup.string().required(),
+      rg_back: Yup.string().required(),
+    })
+
+    await schema.validate(infos, {
+      abortEarly: false
+    })
+
+    const driverInfos = {
+      name: infos.name,
+      rg: infos.rg,
+      cellphone: numOnly(infos.cellphone),
+      cpf_cnpj: numOnly(infos.cpf_cnpj),
+      cnh: numOnly(infos.cnh),
+      user_id: userId
+    }
+
+    await auth.put(`/drivers/${userId}`, driverInfos);
+
+    const img = new FormData();
+    img.append('img', infos.img);
+    const selfie = new FormData();
+    selfie.append('selfie', infos.selfie);
+    const cnhFront = new FormData();
+    cnhFront.append('cnh_front', infos.cnh_front);
+    const cnhBack = new FormData();
+    cnhBack.append('cnh_back', infos.cnh_back);
+    const rgFront = new FormData();
+    rgFront.append('rg_front', infos.rg_front)
+    const rgBack = new FormData();
+    rgBack.append('rg_back', infos.rg_back)
+
+    await auth.post(`/drivers/${userId}/upload?type=img`, img);
+    await auth.post(`/drivers/${userId}/upload?type=selfie`, selfie);
+    await auth.post(`/drivers/${userId}/upload?type=cnh_front`, cnhFront);
+    await auth.post(`/drivers/${userId}/upload?type=cnh_back`, cnhBack);
+    await auth.post(`/drivers/${userId}/upload?type=rg_front`, rgFront);
+    await auth.post(`/drivers/${userId}/upload?type=rg_back`, rgBack);
+  },[userId] )
+
+  const handleSellerSubmit = useCallback( async (infos) => {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      cellphone: Yup.string().required(),
+      img: Yup.string().required()
+    });
+
+    await schema.validate(infos)
+
+    const sellerImg = new FormData();
+
+    sellerImg.append('img', infos.img);
+    await auth.post(`/sellers/${userId}/upload`, sellerImg);
+
+    const sellerInfos = {
+      cellphone: numOnly(infos.cellphone),
+      name: infos.name
+    }
+
+    await auth.put(`/sellers/${userId}`, sellerInfos);
+  },[userId])
+
   const handleSubmit3 = useCallback( async (infos) => {
     setLoading(true)
-
     try {
-      const schema = Yup.object().shape({
-        name: Yup.string().required(),
-        cellphone: Yup.string().required(),
-        img: Yup.string().required()
-      });
+      if(isDriver){
+        await handleDriverSubmit(infos);
 
-      await schema.validate(infos)
+        setLoading(false)
 
-      const sellerImg = new FormData();
-
-      sellerImg.append('img', infos.img);
-      await auth.post(`/sellers/${userId}/upload`, sellerImg);
-
-      const sellerInfos = {
-        cellphone: numOnly(infos.cellphone),
-        name: infos.name
+        return toast.success('Usuário adicionado com sucesso.')
       }
-
-      await auth.put(`/sellers/${userId}`, sellerInfos);
+      await handleSellerSubmit(infos);
 
       setLoading(false)
 
@@ -170,7 +238,7 @@ const CreateSeller = () => {
       toast.error(error.message)
     }
     
-  },[userId])
+  },[handleDriverSubmit, handleSellerSubmit, isDriver])
 
   const handleGetCep = useCallback( async (data) => {
     setLoading(true)
@@ -237,7 +305,8 @@ const CreateSeller = () => {
               <InputBasic name="password" placeholder="Digite a senha" type="password" icon={IoIosLock} label="Senha"/>
               <InputBasic name="password_confirmation" placeholder="Repita a senha" type="password" icon={IoIosLock} label="Confirmação de senha"/>
               <InputSelect name="role" placeholder="Tipo de usuário" label="Tipo de usuário" icon={IoIosContact} options={[
-                {value: 'seller', label: 'Vendedor'}
+                { value: 'seller', label: 'Vendedor' },
+                { value: 'driver', label: 'Entregador' }
               ]}/>
               <LoadingMask loading={loading} className="loadingContainer">
                 <Button type="submit" title="Próximo"/>
@@ -278,9 +347,26 @@ const CreateSeller = () => {
             <Form onSubmit={handleSubmit3} initialData={seller} className="panelContainerContact">
               <InputBasic name="name" placeholder="Digite seu nome" type="text" icon={IoIosPerson} label="Nome"/>
               <InputMask mask="(99) 9 9999-9999" name="cellphone" placeholder="Digite o telefone" type="text" icon={IoIosCall} label="Telefone"/>
-              <InputFile name="img" placeholder="Envie sua logo" type="file" icon={IoIosImage} label="Logo" />
+              <InputFile name="img" placeholder="Envie sua logo" type="file" icon={IoIosImage} label="Avatar" />
+              {isDriver && (
+                <>
+                  <InputSelect name="role" placeholder="Selecione o sexo" label="Sexo" icon={IoIosBody} options={[
+                    { value: 'male', label: 'Masculino' },
+                    { value: 'female', label: 'Feminino' },
+                    { value: 'other', label: 'Outro'}
+                  ]}/>
+                  <InputBasic name="cpf_cnpj" type="number" placeholder="Digite apenas números" label="CPF/CPNJ" icon={IoIosBarcode}/>
+                  <InputMask name="cnh" mask="99999999999" placeholder="Digite sua CNH" label="CNH" icon={IoIosFingerPrint}/>
+                  <InputFile name="cnh_front" placeholder="Parte da frente da CNH" type="file" icon={IoIosDocument} label="Parte da frente CNH" />
+                  <InputFile name="cnh_back" placeholder="Parte de trás da CNH" type="file" icon={IoIosCopy} label="Parte de trás da CNH" />
+                  <InputMask name="rg" mask="99.999.999-9" maskChar="" placeholder="Digite seu RG" label="RG" icon={IoIosContact}/>
+                  <InputFile name="rg_front" placeholder="Parte de trás do RG" type="file" icon={IoIosDocument} label="Parte de trás do RG" />
+                  <InputFile name="rg_back" placeholder="Parte de trás do RG" type="file" icon={IoIosCopy} label="Parte de trás do RG" />
+                  <InputFile name="selfie" placeholder="Selfie" type="file" icon={IoIosCamera} label="Selfie" />
+                </>
+              )}
               <LoadingMask loading={loading} className="loadingContainer">
-                <Button type="submit" title="Cadastrar vendedor"/>
+                <Button type="submit" title="Cadastrar usuário"/>
               </LoadingMask>
             </Form>
           </TabPanel>

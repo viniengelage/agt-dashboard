@@ -15,6 +15,8 @@ import ListManager from '../pages/Manager/ListManager';
 
 import CreateLocale from '../pages/Admin/CreateLocale'
 
+import ListCostumer from '../pages/Costumer/ListCostumer';
+
 export const AdminRoutes = [
   {
     title: "Adicionar manager",
@@ -77,5 +79,13 @@ export const ManagerRoutes = [
     exact: true,
     menu: true,
     component: ListSeller,
+  },
+  {
+    title: "Lista de clientes",
+    path: "/costumer/index",
+    icon: IoIosListBox,
+    exact: true,
+    menu: true,
+    component: ListCostumer,
   },
 ];
